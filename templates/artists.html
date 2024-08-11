@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupie-tracker</title>
+    <link rel="stylesheet" href="/static/artists.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@300;600&display=swap">
+    <style>
+        .photo-container {
+            position: relative;
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .top-photo {
+            width: 100%;
+            height: auto;
+        }
+
+        .photo-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .photo-overlay h1 {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .photo-overlay p {
+            font-size: 1.2rem;
+            margin: 10px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div class="logo">Groupie-tracker</div>
+        <div class="search-container">
+            <input type="text" class="search-input" id="search-input" placeholder="Search artist...">
+            <button class="search-button">
+                <i class="fas fa-search"></i> Search
+            </button>
+        </div>
+    </div>
+    <div class="photo-container">
+        <img src="/static/backgroud.jpg" alt="Groupie-tracker" class="top-photo">
+        <div class="photo-overlay">
+            <h1>Discover the Magic of Music</h1>
+            <p>Explore the world of your favorite artists and find new ones. Let the rhythm of music inspire you!</p>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="content-tabs">
+            <button class="tab active">Artists</button>
+            <button class="tab">About</button>
+        </div>
+        <div class="content-grid" id="content-grid">
+            {{range .Artist}}
+            <a href="/artist/{{.ID}}" class="content-card">
+                <img src="{{.Image}}" alt="{{.Name}}" class="content-poster">
+                <div class="content-info">
+                    <h3 class="content-title">{{.Name}}</h3>
+                </div>
+            </a>
+            {{end}}
+        </div>
+    </div>
+    <script src="/static/scriptartist.js"></script>
+</body>
+</html>
