@@ -12,6 +12,5 @@ func RegisterRoutes() {
 	http.HandleFunc("/locations", handlers.GetLocationsHandler)
 	http.HandleFunc("/dates", handlers.GetDatesHandler)
 	http.HandleFunc("/relations", handlers.GetRelationsHandler)
-	http.HandleFunc("/artists/", handlers.GetArtistByIDHandler)
 	http.HandleFunc("/artist/", handlers.ServeArtistDetails)
 }
