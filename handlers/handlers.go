@@ -24,7 +24,6 @@ type ArtistDetailData struct {
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.Error(w, "page not found", http.StatusNotFound)
-		log.Println("wewe utakufa vibaya wewe")
 		return
 	}
 
@@ -103,42 +102,6 @@ func GetRelationsHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(relations); err != nil {
 		http.Error(w, "Failed to encode locations", http.StatusInternalServerError)
-	}
-}
-
-func GetArtistByIDHandler(w http.ResponseWriter, r *http.Request) {
-	trimmedPath := strings.TrimSuffix(r.URL.Path, "/")
-
-	// Get artist ID from the URL path
-	idStr := strings.TrimPrefix(trimmedPath, "/artists/")
-
-	artistID, err := strconv.Atoi(idStr)
-	if err != nil {
-		log.Println("Error converting ID:", err)
-		http.Error(w, "Invalid artist ID", http.StatusBadRequest)
-		return
-	}
-
-	artist, relation, err := services.GetArtistByID(artistID)
-	if err != nil {
-		log.Println("Error fetching artist or relation:", err)
-		http.Error(w, "Failed to fetch artist or relation", http.StatusInternalServerError)
-		return
-	}
-
-	// Create a response combining artist and relation data
-	response := struct {
-		Artist   *models.Artist   `json:"artist"`
-		Relation *models.Relation `json:"relation"`
-	}{
-		Artist:   artist,
-		Relation: relation,
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	if err := json.NewEncoder(w).Encode(response); err != nil {
-		log.Println("Error encoding response:", err)
-		http.Error(w, "Failed to encode response", http.StatusInternalServerError)
 	}
 }
 
