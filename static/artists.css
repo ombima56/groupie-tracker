@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+:root {
+    --primary-color: #FF0000;
+    --secondary-color: #333333;
+    --background-color: #F0F0F0;
+    --text-color: #000000;
+    --card-background: #FFFFFF;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #333333;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    margin-right: 10px;
+    width: 250px;
+}
+
+.search-button, .back-button {
+    background: var(--primary-color);
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.main-content, .artist-details {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.content-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+
+.tab {
+    padding: 10px 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tab.active {
+    background-color: var(--primary-color);
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    align-content: ve;
+}
+
+.content-card {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-color);
+    display: block;
+}
+
+.content-card:hover {
+    transform: translateY(-5px);
+}
+
+.content-poster {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.content-info {
+    padding: 10px;
+}
+
+.content-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.artist-details {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.artist-details h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.artist-details img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.artist-details p {
+    margin-bottom: 10px;
+}
+
+.concert-info {
+    margin-top: 20px;
+}
+
+.concert-info h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.concert-info ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+@media (max-width: 768px) {
+    .content-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
