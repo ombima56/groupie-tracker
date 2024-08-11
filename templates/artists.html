@@ -13,32 +13,82 @@
             text-align: center;
             color: white;
             margin-bottom: 20px;
+            overflow: hidden;
+            height: 70vh;
         }
-
         .top-photo {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6);
+            transition: transform 0.3s ease;
         }
-
+        .photo-container:hover .top-photo {
+            transform: scale(1.05);
+        }
         .photo-overlay {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.5);
+            width: 80%;
             padding: 20px;
-            border-radius: 10px;
             text-align: center;
+            z-index: 2;
         }
-
         .photo-overlay h1 {
-            font-size: 2rem;
+            font-size: 3.5rem;
             margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
         }
-
         .photo-overlay p {
             font-size: 1.2rem;
-            margin: 10px 0 0;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+            font-family: 'Roboto', sans-serif;
+        }
+        .music-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .feature-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .feature-item {
+            margin: 10 20px;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+            flex-basis: calc(25% - 40px);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .cta-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 24px;
+            background-color: #1DB954;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #1ED760;
         }
     </style>
 </head>
@@ -55,8 +105,28 @@
     <div class="photo-container">
         <img src="/static/backgroud.jpg" alt="Groupie-tracker" class="top-photo">
         <div class="photo-overlay">
-            <h1>Discover the Magic of Music</h1>
-            <p>Explore the world of your favorite artists and find new ones. Let the rhythm of music inspire you!</p>
+            <i class="fas fa-music music-icon"></i>
+            <h1>Groupie Tracker</h1>
+            <p>Discover and explore your favorite artists, their concerts, and more!</p>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <i class="fas fa-user-friends feature-icon"></i>
+                    <p>Artist Profiles</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-map-marker-alt feature-icon"></i>
+                    <p>Concert Locations</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-calendar-alt feature-icon"></i>
+                    <p>Upcoming Dates</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-link feature-icon"></i>
+                    <p>Data Relations</p>
+                </div>
+            </div>
+            <a href="#" class="cta-button" id="explore-btn">Explore Artists</a>
         </div>
     </div>
     <div class="main-content">
