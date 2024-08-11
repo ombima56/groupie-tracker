@@ -163,6 +163,5 @@ func GetArtistByID(artistID int) (*models.Artist, *models.Relation, error) {
 	if relation == nil {
 		return nil, nil, fmt.Errorf("relation not found for artist")
 	}
-
 	return artist, relation, nil
 }
