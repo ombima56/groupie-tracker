@@ -97,12 +97,14 @@
 </head>
 <body>
     <div class="topbar">
-        <div class="logo">Groupie-tracker</div>
+        <div class="logo">Groupie Tracker</div>
         <div class="search-container">
-            <input type="text" class="search-input" id="search-input" placeholder="Search artist...">
-            <button class="search-button">
-                <i class="fas fa-search"></i> Search
-            </button>
+            <form action="/artist" method="get">
+                <input type="text" name="query" class="search-input" id="search-input" placeholder="Search artist..." value="{{.Query}}">
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </form>
         </div>
     </div>
     <div class="photo-container">
@@ -129,18 +131,29 @@
                     <p>Data Relations</p>
                 </div>
             </div>
-            <a href="#content-grid" class="cta-button" id="explore-btn">Explore Artists</a>
+            <!-- <a href="#content-grid" class="cta-button" id="explore-btn">Explore Artists</a> -->
+            <!-- <a href="/Explore Artists" class="cta-button" id="explore-btn">Explore Artists</a> -->
         </div>
     </div>
     <div class="main-content">
+        <div class="content-tabs">
+            <a href="/artist" class="tab active" id="artists-btn">Artists</a>
+            <a href="#" class="tab" id="about-btn">About</a>
+        </div>
         <div class="content-grid" id="content-grid">
-            {{range .Artist}}
+            {{if .NoResults}}
+            <div class="error-message">
+                <p>No artists found matching your query. Please try a different search term.</p>
+            </div>
+            {{else}}
+            {{range .Artists}}
             <a href="/artist/{{.ID}}" class="content-card">
                 <img src="{{.Image}}" alt="{{.Name}}" class="content-poster">
                 <div class="content-info">
                     <h3 class="content-title">{{.Name}}</h3>
                 </div>
             </a>
+            {{end}}
             {{end}}
         </div>
     </div>
