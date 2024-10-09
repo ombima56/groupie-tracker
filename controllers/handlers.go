@@ -103,7 +103,6 @@ func getCachedData() ([]api.Artist, []api.Location, []api.Date, []api.Relation) 
 
 // ErrorHandler handles error responses and templates
 func ErrorHandler(w http.ResponseWriter, message string, statusCode int, logError, showStatusCode bool) {
-
 	if w.Header().Get("Content-Type") != "" {
 		// Headers already sent, just log the error and return
 		if logError {
@@ -112,7 +111,11 @@ func ErrorHandler(w http.ResponseWriter, message string, statusCode int, logErro
 		return
 	}
 
+	// Set the content type
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
+	// Set the HTTP status code
+	w.WriteHeader(statusCode)
 
 	data := struct {
 		StatusCode int
@@ -136,8 +139,6 @@ func ErrorHandler(w http.ResponseWriter, message string, statusCode int, logErro
 		return
 	}
 
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-
 	var buf bytes.Buffer
 	if err := tmpl.Execute(&buf, data); err != nil {
 		if logError {
@@ -146,6 +147,7 @@ func ErrorHandler(w http.ResponseWriter, message string, statusCode int, logErro
 		return
 	}
 
+	// Write the buffer to the response
 	_, err = buf.WriteTo(w)
 	if err != nil {
 		if logError {
@@ -309,6 +311,7 @@ func GetSearchSuggestionsHandler(w http.ResponseWriter, r *http.Request) {
 
 	json.NewEncoder(w).Encode(suggestions)
 }
+
 // Serve artist details page
 func ServeArtistDetails(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path == "/artist/" {
@@ -326,7 +329,7 @@ func ServeArtistDetails(w http.ResponseWriter, r *http.Request) {
 	artist, location, date, relation, err := api.GetArtistByID(id)
 	if err != nil {
 		log.Printf("Error retrieving artist by ID %v: %s", id, err)
-		ErrorHandler(w, "Ooops!\n We ran into an issue while fetching Artists,\n Please try again later.", http.StatusInternalServerError, false, false)
+		ErrorHandler(w, "Oops!\n We ran into an issue while fetching Artists,\n Please try again later.", http.StatusInternalServerError, false, false)
 		return
 	}
 
