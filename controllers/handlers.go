@@ -103,7 +103,6 @@ func getCachedData() ([]api.Artist, []api.Location, []api.Date, []api.Relation) 
 
 // ErrorHandler handles error responses and templates
 func ErrorHandler(w http.ResponseWriter, message string, statusCode int, logError, showStatusCode bool) {
-
 	if w.Header().Get("Content-Type") != "" {
 		// Headers already sent, just log the error and return
 		if logError {
@@ -112,7 +111,11 @@ func ErrorHandler(w http.ResponseWriter, message string, statusCode int, logErro
 		return
 	}
 
+	// Set the content type
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
+	// Set the HTTP status code
+	w.WriteHeader(statusCode)
 
 	data := struct {
 		StatusCode int
@@ -136,8 +139,6 @@ func ErrorHandler(w http.ResponseWriter, message string, statusCode int, logErro
 		return
 	}
 
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-
 	var buf bytes.Buffer
 	if err := tmpl.Execute(&buf, data); err != nil {
 		if logError {
@@ -146,6 +147,7 @@ func ErrorHandler(w http.ResponseWriter, message string, statusCode int, logErro
 		return
 	}
 
+	// Write the buffer to the response
 	_, err = buf.WriteTo(w)
 	if err != nil {
 		if logError {
@@ -166,16 +168,42 @@ func ServeArtists(w http.ResponseWriter, r *http.Request) {
 
 	artists, _, _, _ := getCachedData()
 
-	for i := range artists {
-		// Format the URL with the value of i
-		url := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/locations/%d", i+1)
+	var wg sync.WaitGroup
+	locationCh := make(chan struct {
+		id        int
+		locations []string
+		err       error
+	}, len(artists))
 
-		// Fetch artist locations using the formatted URL
-		locations, err := FetchArtistLocations(url)
-		if err == nil {
-			artists[i].Locations = strings.Join(locations, ", ")
+	for i := range artists {
+		wg.Add(1)
+		go func(i int) {
+			defer wg.Done()
+			url := fmt.Sprintf("https://groupietrackers.herokuapp.com/api/locations/%d", i+1)
+
+			locations, err := FetchArtistLocations(url)
+			if err != nil {
+				log.Printf("Error fetching location for artist %d: %v", i+1, err)
+				ErrorHandler(w, "An unexpected error occurred while fetching artist locations. Please try again later.", http.StatusInternalServerError, false, false)
+			}
+			locationCh <- struct {
+				id        int
+				locations []string
+				err       error
+			}{id: i, locations: locations, err: err}
+		}(i)
+	}
+
+	go func() {
+		wg.Wait()
+		close(locationCh)
+	}()
+
+	for loc := range locationCh {
+		if loc.err == nil {
+			artists[loc.id].Locations = strings.Join(loc.locations, ", ")
 		} else {
-			log.Printf("Error fetching location for artist %d: %v", artists[i].ID, err)
+			log.Printf("Error fetching location for artist %d: %v", artists[loc.id].ID, loc.err)
 		}
 	}
 
@@ -199,7 +227,6 @@ func ServeArtists(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Use a buffer to render the template
 	var buf bytes.Buffer
 	err = tmpl.Execute(&buf, data)
 	if err != nil {
@@ -208,7 +235,6 @@ func ServeArtists(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Write the rendered template to the response
 	_, err = buf.WriteTo(w)
 	if err != nil {
 		if strings.Contains(err.Error(), "broken pipe") || strings.Contains(err.Error(), "connection reset by peer") {
@@ -309,6 +335,7 @@ func GetSearchSuggestionsHandler(w http.ResponseWriter, r *http.Request) {
 
 	json.NewEncoder(w).Encode(suggestions)
 }
+
 // Serve artist details page
 func ServeArtistDetails(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path == "/artist/" {
@@ -326,7 +353,7 @@ func ServeArtistDetails(w http.ResponseWriter, r *http.Request) {
 	artist, location, date, relation, err := api.GetArtistByID(id)
 	if err != nil {
 		log.Printf("Error retrieving artist by ID %v: %s", id, err)
-		ErrorHandler(w, "Ooops!\n We ran into an issue while fetching Artists,\n Please try again later.", http.StatusInternalServerError, false, false)
+		ErrorHandler(w, "Oops!\n We ran into an issue while fetching Artists,\n Please try again later.", http.StatusInternalServerError, false, false)
 		return
 	}
 
