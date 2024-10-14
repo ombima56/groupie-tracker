@@ -98,7 +98,7 @@ This project exists thanks to all the people who contribute:
 
 - [Vincent Omondi](https://github.com/Vincent-Omondi)
 - [Hillary Ombima](https://github.com/ombima56)
-- [John Eluid](https://github.com/johneliud)
+- [John Eliud](https://github.com/johneliud)
 
 ## Contributing
 
