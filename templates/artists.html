@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/animation.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <title>Groupie Tracker</title>
+  </head>
+  <body>
+    <header>
+      <nav class="topbar">
+        <div class="logo">Groupie Tracker</div>
+        <div class="search-container">
+          <input type="search" name="query" class="search-input" id="search-input" placeholder="Search for artists..." value="{{.Query}}">
+          <button type="submit" class="search-button" id="search-button">
+            <i class="fas fa-search"></i>
+          </button>
+          <ul id="suggestions" class="suggestions-list"></ul>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+      <div class="content">
+        <h2 class="animated fadeInLeftBig">
+          Explore <span>Favorite</span> Artists!
+        </h2>
+        <h3 class="animated fadeInRightBig">
+          Groupie Trackers brings you closer to the music you love.
+        </h3>
+        </div>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="content-tabs">
+        <a href="/" class="tab active" id="artists-btn">Artists</a>
+        <a href="/about" class="tab" id="about-btn">About</a>
+      </div>
+      <div class="content-grid" id="content-grid">
+        {{if .NoResults}}
+        <div class="error-message">
+          <p>
+            No artists found matching your query. Please try a different search
+            term.
+          </p>
+        </div>`
+        {{else}} {{range .Artists}}
+        <a href="/artist/{{.ID}}" class="content-card">
+          <img src="{{.Image}}" alt="{{.Name}}" class="content-poster" />
+          <div class="content-info">
+            <h3 class="content-title">{{.Name}}</h3>
+          </div>
+        </a>
+        {{end}} {{end}}
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h2>Groupie Tracker</h2>
+        </div>
+        <div class="footer-links">
+          <a href="/about">About</a>
+        </div>
+        <div class="footer-socials">
+          <a
+            href="https://learn.zone01kisumu.ke/git/johnodhiambo0/groupie-tracker"
+            target="_blank"
+            ><i class="fab fa-github"></i
+          ></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Groupie Tracker. All Rights Reserved.</p>
+      </div>
+    </footer>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>
