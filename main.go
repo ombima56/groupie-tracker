@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"learn.zone01kisumu.ke/git/johnodhiambo0/groupie-tracker/controllers"
+	"learn.zone01kisumu.ke/git/johnodhiambo0/groupie-tracker-visualizations/controllers"
 )
 
 func main() {

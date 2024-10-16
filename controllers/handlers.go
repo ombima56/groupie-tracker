@@ -12,7 +12,7 @@ import (
 	"text/template"
 	"time"
 
-	"learn.zone01kisumu.ke/git/johnodhiambo0/groupie-tracker/api"
+	"learn.zone01kisumu.ke/git/johnodhiambo0/groupie-tracker-visualizations/api"
 )
 
 type TemplateData struct {
