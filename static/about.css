@@ -49,18 +49,20 @@ body header .navbar {
   z-index: 5;
 }
 
-body header .navbar .logo {
-  font-size: 28px;
-  font-weight: bold;
-  color: var(--primary-color);
-}
-
-body header .navbar a {
+body header .navbar .back-to-artists {
   background-color: var(--primary-color);
   color: var(--text-color);
   text-decoration: none;
   padding: 10px 20px;
   border-radius: 20px;
+}
+
+body header .navbar .logo .anchor-logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--primary-color);
+  background-color: none;
+  text-decoration: none;
 }
 
 .container {
