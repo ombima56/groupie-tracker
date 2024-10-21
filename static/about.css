@@ -132,7 +132,7 @@ body header .navbar a {
 }
 
 .footer {
-  margin-top: auto;
+  margin: auto auto 20px;
 }
 
 .footer .contributors {
@@ -142,7 +142,7 @@ body header .navbar a {
 
 .footer .contributors .title p {
   color: var(--primary-color);
-  font-weight: 900;
+  font-weight: 700;
   font-size: 22px;
 }
 
