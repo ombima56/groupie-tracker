@@ -57,6 +57,11 @@ body {
   cursor: pointer;
 }
 
+.topbar .back-to-artists:hover {
+  background-color: var(--primary-color);
+  color: var(--card-background);
+}
+
 .container {
   display: flex;
   padding: 30px;
