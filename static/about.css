@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Jost", sans-serif;
+  font-family: 'Jost', sans-serif;
 }
 
 :root {
@@ -23,8 +23,10 @@ li {
 }
 
 body {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -50,7 +52,7 @@ body header .navbar {
 body header .navbar .logo {
   font-size: 28px;
   font-weight: bold;
-  color: var(--text-color);
+  color: var(--primary-color);
 }
 
 body header .navbar a {
@@ -86,8 +88,10 @@ body header .navbar a {
   align-items: center;
 }
 
-.container .accordion .question h3 {
-  font-size: 28px;
+.container .accordion .question p {
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--primary-color);
 }
 
 .container .accordion .question ion-icon {
@@ -101,13 +105,9 @@ body header .navbar a {
   display: block;
 }
 
-.container .accordion .answer p {
-  font-size: 20px;
-}
-
-h3 {
-  font-size: 28px;
-  margin: 20px auto 0;
+.container .accordion .answer p,
+.container .accordion .answer ol li {
+  font-size: 16px;
 }
 
 .contributors {
@@ -121,4 +121,38 @@ h3 {
   text-decoration: none;
   font-size: 20px;
   color: var(--text-color);
+}
+
+.footer,
+.footer .contributors {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  margin-top: auto;
+}
+
+.footer .contributors {
+  width: 80%;
+  flex-direction: column;
+}
+
+.footer .contributors .title p {
+  color: var(--primary-color);
+  font-weight: 900;
+  font-size: 22px;
+}
+
+.footer .contributors .author-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer .contributors .author-section .contributor:hover a {
+  color: var(--primary-color);
 }
