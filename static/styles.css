@@ -53,6 +53,11 @@ body {
   color: var(--primary-color)
 }
 
+.logo a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
 /* Search Container */
 .search-container {
   position: relative;
