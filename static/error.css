@@ -67,6 +67,10 @@ body header .navbar .back-to-artists {
   border-radius: 20px;
 }
 
+body header .navbar .back-to-artists:hover {
+  background-color: #cc0000;
+}
+
 .background {
   flex: 1;
   width: 100%;
