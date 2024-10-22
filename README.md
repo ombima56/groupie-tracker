@@ -42,7 +42,7 @@ The search bar allows users to perform searches on multiple attributes of an art
 - **Keyboard Navigation:**
   - Users can navigate through suggestions using the arrow keys and select a suggestion by pressing the enter key, allowing for seamless keyboard interactions.
 
-2. Search Workflow
+2. **Search Workflow**
 
 - **Fetching Initial Suggestions:**
 
@@ -59,6 +59,42 @@ The search bar allows users to perform searches on multiple attributes of an art
 - **Performing a Search:**
   - Once the user selects a suggestion or presses the enter key, the search is executed, and the results are displayed accordingly.
 
+3. **Keyboard Shortcuts**
+
+- The site now features use of keyboard shortcuts to perform specific operations as listed below:
+
+  ```bash
+  H : Navigate to Home page
+  ```
+
+  ```bash
+  A : Go to Artists page
+  ```
+
+  ```bash
+  I : Go to About page
+  ```
+
+  ```bash
+  / : Focus search bar
+  ```
+
+  ```bash
+  ESC : Go back to previous page
+  ```
+
+  ```bash
+  ← → : Navigate between artists (in grid view)
+  ```
+
+  ```bash
+  ↑ ↓ : Navigate search suggestions
+  ```
+
+  ```bash
+  Enter : Select current search suggestion
+  ```
+
 ## Example
 
 Imagine you have created a card system to display the band data. The user can directly search for the band or member they want to see. For example:
@@ -67,9 +103,9 @@ Imagine you have created a card system to display the band data. The user can di
 
 2. The search bar suggests options like:
 
-   - Phil Collins - member
+- Phil Collins - member
 
-   - Phil Collins - artist/band
+- Phil Collins - artist/band
 
 3. The user selects Phil Collins - artist/band and the page is redirected to show details about Phil Collins as an artist.
 
@@ -85,10 +121,10 @@ To run this project locally:
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://learn.zone01kisumu.ke/git/johnodhiambo0/groupie-tracker-visualizations.git
-   cd groupie-tracker-search-bar
-   ```
+```bash
+git clone https://learn.zone01kisumu.ke/git/johnodhiambo0/groupie-tracker-visualizations.git
+cd groupie-tracker-search-bar
+```
 
 2. Run the application:
 
