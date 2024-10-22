@@ -20,7 +20,7 @@ func ServeShortcuts(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Error parsing index.html: %v\n", err)
 		return
 	}
-	
+
 	err = tmpl.Execute(w, nil)
 	if err != nil {
 		ErrorHandler(w, "Something unexpected occured", http.StatusInternalServerError, false, false)
