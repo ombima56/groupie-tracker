@@ -17,7 +17,7 @@ document.addEventListener('keydown', function (event) {
       break;
 
     // Search functionality
-    case 's':
+    case '/':
       event.preventDefault();
       const searchInput = document.querySelector('.search-input');
       if (searchInput) {
