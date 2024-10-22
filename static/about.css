@@ -59,6 +59,10 @@ body header .navbar .back-to-artists {
   border-radius: 20px;
 }
 
+body header .navbar .back-to-artists:hover {
+  background-color: #cc0000;
+}
+
 body header .navbar .logo .anchor-logo {
   font-size: 28px;
   font-weight: bold;
