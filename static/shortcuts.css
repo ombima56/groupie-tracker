@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Grandiflora+One&family=Jost:ital,wght@0,100..900;1,100..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Jost', sans-serif;
+}
+
+:root {
+  --primary-color: #ff0000;
+  --secondary-color: #333333;
+  --background-color: black;
+  --text-color: #ffffff;
+  --card-background: #333333;
+  --header-height: 80px;
+}
+
+ol,
+li {
+  text-decoration: none;
+  list-style: none;
+  font-size: 20px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding-top: var(--header-height);
+}
+
+body header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--background-color);
+  z-index: 1000;
+}
+
+body header .navbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px;
+  margin: 0;
+  height: var(--header-height);
+  background-color: rgba(51, 51, 51, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+body header .navbar .back-to-artists {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+}
+
+body header .navbar .back-to-artists:hover {
+  background-color: #cc0000;
+}
+
+body header .navbar .logo .anchor-logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+body header .navbar .logo .anchor-logo:hover {
+  color: #cc0000; 
+}
+
+.container {
+  display: grid;
+  place-items: center;
+  width: 80%;
+  margin-top: 2rem;
+}
+
+.shortcuts-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--card-background);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.shortcuts-container h1 {
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.shortcuts-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1rem 0;
+}
+
+.shortcuts-table th,
+.shortcuts-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.shortcuts-table th {
+  font-weight: bold;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.shortcuts-table tr:hover {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.shortcuts-table kbd {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  background-color: var(--secondary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  box-shadow: 0 2px 0 var(--primary-color);
+  margin: 0 0.2rem;
+}
+
+/* Media Query */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 70px;
+  }
+
+  .shortcuts-container {
+    width: 95%;
+    padding: 1rem;
+  }
+
+  .shortcuts-table th,
+  .shortcuts-table td {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .shortcuts-container h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --header-height: 60px;
+  }
+
+  .shortcuts-table th,
+  .shortcuts-table td {
+    padding: 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .shortcuts-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .shortcuts-table kbd {
+    padding: 0.1rem 0.4rem;
+    font-size: 0.8rem;
+  }
+
+  body header .navbar .logo .anchor-logo {
+    font-size: 24px;
+  }
+}
