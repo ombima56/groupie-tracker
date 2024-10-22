@@ -19,6 +19,7 @@ func main() {
 	http.HandleFunc("/artists", controllers.ServeArtists)
 	http.HandleFunc("/artist/", controllers.ServeArtistDetails)
 	http.HandleFunc("/about", controllers.AboutHandler)
+	http.HandleFunc("/shortcuts", controllers.ServeShortcuts)
 	http.HandleFunc("/search-suggestions", controllers.GetSearchSuggestionsHandler)
 	http.HandleFunc("/", controllers.HandlerPath)
 
