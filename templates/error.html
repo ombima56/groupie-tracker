@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="/static/error.css" />
   </head>
   <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <a href="/" class="anchor-logo">Groupie Tracker</a>
+        </div>
+
+        <a href="/artists" class="back-to-artists">Back to Artists</a>
+      </nav>
+    </header>
+
     <div class="background"></div>
     <div class="error-container">
       {{ if gt .StatusCode 0 }}
