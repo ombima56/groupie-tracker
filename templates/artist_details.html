@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Artist Details</title>
     <link rel="stylesheet" href="/static/styles_details.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <style>
+      #map {
+        height: 400px;
+        width: 100%;
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -72,8 +81,8 @@
           </ul>
         </div>
 
+        <h3>Locations</h3>
         <div id="locations" class="tab-content">
-          <h3>Locations</h3>
           <ul>
             {{range .Location.Locations}}
             <li>{{.}}</li>
@@ -83,6 +92,8 @@
       </div>
     </div>
 
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="/static/script.js"></script>
     <script src="/static/shortcuts.js"></script>
   </body>
