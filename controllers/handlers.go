@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
-	"text/template"
+	"html/template"
 	"time"
 
 	"learn.zone01kisumu.ke/git/johnodhiambo0/groupie-tracker-visualizations/api"
@@ -22,10 +22,11 @@ type TemplateData struct {
 }
 
 type ArtistDetailData struct {
-	Artist   api.Artist
-	Location api.Location
-	Date     api.Date
-	Relation api.Relation
+	Artist    api.Artist
+	Location  api.Location
+	Date      api.Date
+	Relation  api.Relation
+	Locations []LocationWithCoordinates
 }
 
 var (
@@ -37,6 +38,13 @@ var (
 	cacheMutex         sync.RWMutex
 	isCacheInitialized bool
 )
+
+// Handle geolocation information for the artist location details
+type LocationWithCoordinates struct {
+	Name      string
+	Latitude  string
+	Longitude string
+}
 
 const cacheDuration = 10 * time.Minute
 
@@ -356,12 +364,24 @@ func ServeArtistDetails(w http.ResponseWriter, r *http.Request) {
 		ErrorHandler(w, "Oops!\n We ran into an issue while fetching Artists,\n Please try again later.", http.StatusInternalServerError, false, false)
 		return
 	}
+	coordinates = make(map[string][]float64)
+	for _, location := range location.Locations {
+		lat, lon, err := Geocode(location)
+		if err != nil {
+			log.Printf("failed to fetch coordinates: %v", err)
+			ErrorHandler(w, "Internal Server Error", http.StatusInternalServerError, false, false)
+			return
+		}
+		coordinates[location] = []float64{lat, lon}
+	}
+
 
 	data := ArtistDetailData{
-		Artist:   *artist,
-		Location: *location,
-		Date:     *date,
-		Relation: *relation,
+		Artist:    *artist,
+		Location:  *location,
+		Date:      *date,
+		Relation:  *relation,
+		// Locations: locationsWithCoords,
 	}
 
 	tmpl, err := template.ParseFiles("templates/artist_details.html")
