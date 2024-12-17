@@ -12,6 +12,8 @@ func HandlerPath(w http.ResponseWriter, r *http.Request) {
 
 	case "/static/":
 		ErrorHandler(w, "Access forbidden. Please check your URL or navigate to the homepage.", http.StatusForbidden, false, false)
+	case "/coordinates":
+		SendCoordinates(w, r)
 	default:
 		ErrorHandler(w, "Page Not Found", http.StatusNotFound, true, true)
 	}

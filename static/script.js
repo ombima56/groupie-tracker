@@ -14,7 +14,6 @@ function switchTab(clickedTab) {
     tab.classList.remove('active');
   });
   clickedTab.classList.add('active');
-  // Add logic here to show/hide content based on the selected tab
 }
 
 document.addEventListener('DOMContentLoaded', function () {
