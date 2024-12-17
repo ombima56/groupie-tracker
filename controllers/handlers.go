@@ -4,12 +4,12 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 	"strconv"
 	"strings"
 	"sync"
-	"html/template"
 	"time"
 
 	"learn.zone01kisumu.ke/git/johnodhiambo0/groupie-tracker-visualizations/api"
@@ -375,12 +375,11 @@ func ServeArtistDetails(w http.ResponseWriter, r *http.Request) {
 		coordinates[location] = []float64{lat, lon}
 	}
 
-
 	data := ArtistDetailData{
-		Artist:    *artist,
-		Location:  *location,
-		Date:      *date,
-		Relation:  *relation,
+		Artist:   *artist,
+		Location: *location,
+		Date:     *date,
+		Relation: *relation,
 		// Locations: locationsWithCoords,
 	}
 
